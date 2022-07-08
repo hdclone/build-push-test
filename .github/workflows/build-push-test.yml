@@ -23,4 +23,9 @@ jobs:
           repo: svc-broadcaster-k8s-test
           owner: hdclone
           event_type: sample_push
+          message: |
+            {
+              "eslinizhe": "gnida"
+              "esliwishe": "pidor"
+            }
 
