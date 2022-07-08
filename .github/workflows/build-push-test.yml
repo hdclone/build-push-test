@@ -1,11 +1,8 @@
-name: Triggering other repo
+name: "Triggering other repo"
 on:
-    tag:
-        branches:
-            - main
-    push:
-        branches:
-            - main
+  push:
+    tags:        
+      - '*'
 
 jobs:
   wait-and-dispatch:
