@@ -25,7 +25,7 @@ jobs:
           event_type: sample_push
           message: |
             {
-              "eslinizhe": "gnida",
+              "eslinizhe": "${{ github.sha }}",
               "esliwishe": "pidor"
             }
 
