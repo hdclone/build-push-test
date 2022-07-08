@@ -10,7 +10,7 @@ jobs:
         uses: PaulLesur/wait-docker-image-github-action@v1.0
         with:
           image: "symbiosisfinance/svc-broadcaster"
-          tag: "gnida"
+          tag: "0.0.8-tx"
           timeout: 60
           fail-on-timeout: true
           user: "symbiosisfinance"
