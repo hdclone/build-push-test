@@ -1,20 +1,26 @@
-name: Alert parent repository on push
-on: push
+name: Triggering other repo
+on:
+    tag:
+        branches:
+            - main
+    push:
+        branches:
+            - main
 
 jobs:
   wait-and-dispatch:
     name: Wait image building and trigger other repo
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger repo
+      - name: Waiting docker image build
         uses: PaulLesur/wait-docker-image-github-action@v1.0
         with:
           image: "symbiosisfinance/svc-broadcaster"
           tag: "0.0.8-tx"
-          timeout: 60
+          timeout: 600
           fail-on-timeout: true
-          user: "symbiosisfinance"
-          password: "479e9805-6745-44ac-b6ac-4dd9fe3314a8"
+          user: "${{ secrets.DOCKERHUB_LOGIN }}"
+          password: "${{ secrets.DOCKERHUB_PASSWORD }}"
       - name: Emit repository_dispatch
         uses: mvasigh/dispatch-action@main
         with:
