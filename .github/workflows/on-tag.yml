@@ -1,4 +1,4 @@
-name: "Triggering other repo"
+name: "Triggering other repo by tag"
 on:
   push:
     tags:        
