@@ -2,10 +2,17 @@ name: Alert parent repository on push
 on: push
 
 jobs:
-  build:
-    name: Dispatch to `other-repo`
+  wait-and-dispatch:
+    name: Wait image building and trigger other repo
     runs-on: ubuntu-latest
     steps:
+      - name: Trigger repo
+        uses: PaulLesur/wait-docker-image-github-action@v1.0
+        with:
+          image: nginx
+          tag: latest
+          timeout: 20
+          fail-on-timeout: true
       - name: Emit repository_dispatch
         uses: mvasigh/dispatch-action@main
         with:
@@ -14,3 +21,4 @@ jobs:
           repo: svc-broadcaster-k8s-test
           owner: hdclone
           event_type: sample_push
+
