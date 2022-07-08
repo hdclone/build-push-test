@@ -32,6 +32,6 @@ jobs:
           message: |
             {
               "eslinizhe": "${{ github.sha }}",
-              "esliwishe": "pidor"
+              "esliwishe": "${GITHUB_REF_NAME}"
             }
 
