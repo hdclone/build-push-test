@@ -9,6 +9,7 @@ jobs:
       - name: Emit repository_dispatch
         uses: mvasigh/dispatch-action@main
         with:
+# Токен другой репы
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           repo: svc-broadcaster-k8s-test
           owner: hdclone
