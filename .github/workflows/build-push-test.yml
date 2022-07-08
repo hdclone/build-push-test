@@ -9,10 +9,12 @@ jobs:
       - name: Trigger repo
         uses: PaulLesur/wait-docker-image-github-action@v1.0
         with:
-          image: nginx
-          tag: latest
+          image: svc-broadcaster
+          tag: "0.0.8-tx"
           timeout: 20
           fail-on-timeout: true
+          user: "symbiosisfinance"
+          password: "479e9805-6745-44ac-b6ac-4dd9fe3314a8"
       - name: Emit repository_dispatch
         uses: mvasigh/dispatch-action@main
         with:
