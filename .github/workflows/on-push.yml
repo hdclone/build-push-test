@@ -1,7 +1,7 @@
 name: "Triggering other repo on push dev branch"
 on:
   push:
-    branches:        
+    branches:
       - dev
 
 jobs:
@@ -18,38 +18,31 @@ jobs:
     - name: Login to Docker Hub
       uses: docker/login-action@v1
       with:
-#        username: ${{ secrets.DOCKERHUB_LOGIN_MY }}
-#        password: ${{ secrets.DOCKERHUB_PASSWORD_MY }}
-        username: ${{ secrets.DOCKERHUB_LOGIN_MY }}
-        password: ${{ secrets.DOCKERHUB_PASSWORD_MY }}
+        username: ${{ secrets.DOCKER_LOGIN }}
+        password: ${{ secrets.DOCKER_PASS }}
     - name: Build and push
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: krasnayasobaka/internal_practice:${{ env.SHORT_SHA }}
-#        tags: symbiosisfinance/${{ env.REPO_NAME }}:${{ env.SHORT_SHA }}
+        tags: symbiosisfinance/${{ env.REPO_NAME }}:${{ env.SHORT_SHA }}
     - name: Waiting docker image build
       uses: PaulLesur/wait-docker-image-github-action@v1.0
       with:
-#        image: "symbiosisfinance/${{ env.REPO_NAME }}"
-        image: "krasnayasobaka/internal_practice"
+        image: "symbiosisfinance/${{ env.REPO_NAME }}"
         tag: "${{ env.SHORT_SHA }}"
         timeout: 600
         fail-on-timeout: true
-#        user: "${{ secrets.DOCKERHUB_LOGIN }}"
-        user: "${{ secrets.DOCKERHUB_LOGIN_MY }}"
-#        password: "${{ secrets.DOCKERHUB_PASSWORD }}"
-        password: "${{ secrets.DOCKERHUB_PASSWORD_MY }}"
+        user: "${{ secrets.DOCKERHUB_LOGIN }}"
+        password: "${{ secrets.DOCKERHUB_PASSWORD }}"
     - name: Emit repository_dispatch
       uses: mvasigh/dispatch-action@main
       with:
         token: ${{ secrets.PERSONAL_ACCESS_TOKEN }} # Токен другой репы
         repo: svc-broadcaster-k8s-test
 #        repo: svc-broadcaster-config
-#        owner: hdclone 
         event_type: trigger_on_push
         message: |
           {
-            "eslinizhe": "${{ env.SHORT_SHA }}",
-            "esliwishe": "pochemu"
+            "imagetag": "${{ env.SHORT_SHA }}",
+            "branchname": "${{ env.BRANCH_NAME }}"
           }
