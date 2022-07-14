@@ -1,0 +1,50 @@
+chains:
+  - id: 4
+    kind: evm
+    whitelist:
+      - 0x38b07a83b691bB221d0710B0eA6Ebd7494E106D3
+    endpoints:
+      - https://rinkeby.infura.io/v3/40d9adf1363d40cc8c0e9e16e56cc008
+  - id: 97
+    kind: evm
+    whitelist:
+      - 0x67e2696fb65641902AA26DC9bABf76cE134CA377
+    endpoints:
+      - https://nd-409-866-115.p2pify.com/fd1b0ad58aa6bfbf9e73c47290189cd4
+  - id: 43113
+    kind: evm
+    whitelist:
+      - 0x68d12DD9cd42BD62A6F707A96B3dc8D1A6a9f076
+    endpoints:
+      - https://nd-121-182-206.p2pify.com/e9cc9598178791ed0c5e6cd00ef7f3c2/ext/bc/C/rpc
+      - https://api.avax-test.network/ext/bc/C/rpc
+  - id: 65
+    kind: evm
+    whitelist:
+      - 0xf799cAfA26aC2f554fa00193FDA1FcF5315E9B0d
+    endpoints:
+      - https://exchaintestrpc.okex.org/
+  - id: 80001
+    kind: evm
+    whitelist:
+      - 0xedcaeb1d346396b3e4e861e4a6f0b72b9850fcc5
+    endpoints:
+      - https://nd-771-487-261.p2pify.com/d2679fc58ae11d4c41c1a729dd123a2c
+  - id: 256
+    kind: evm
+    whitelist:
+      - 0x234baf8F5B855550eC684b0d5e20c46C5D62662b
+    endpoints:
+      - https://http-testnet.hecochain.com/
+  - id: 28
+    kind: evm
+    endpoints:
+      - https://rinkeby.boba.network
+  - id: 700001
+    kind: cosmos
+    endpoints:
+      - https://rinkeby.boba.network/
+    terra:
+      id: bombay-12
+recovery:
+  enabled: true

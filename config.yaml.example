@@ -1,0 +1,50 @@
+# Specify networks to connect to here.
+networks:
+  # (required) Network name is arbitrary and used in the API URL.
+  rinkeby:
+    # (required) Chain ID is required to satisfy EIP-155.
+    chain_id: 4
+    # (required) Private key of the account used to sign and broadcast incoming
+    # transaction.
+    key: bfe415cb5bff47d5d9eb45ffc9d06bf757287dd2c7c44b81debc434942e1d25c
+    # (optional) Fine tuning for network communication.
+    tuning:
+      # If any error happens during sending the transaction, use the following
+      # retry settings to retransmit the transaction.
+      # Specify -1 to retrying indefinitely. Default: -1.
+      send_retry_count: 5
+      send_retry_sleep_seconds: 1
+      # Confirmation receipt sleep duration. Makes sense only if confirm set to
+      # true.
+      # Default: 1.
+      confirm_retry_sleep_seconds: 1
+    # (optional) Gas limit for sending transaction. Default: 300000
+    gas_limit: 300000
+    # (optional) Wait for every transaction confirmation. Significantly slows
+    # down API requests.
+    confirm: false
+    # (required) List of RPC endpoints to connect to. Only one will be used
+    # (whichever connects first),
+    endpoints:
+      - wss://rinkeby.infura.io/ws/v3/b3572a473b864c489a470acf49d4b41b
+      - wss://speedy-nodes-nyc.moralis.io/123bf90d9ca5b3284b58befb/eth/rinkeby/ws
+
+# (required) Specify HTTP server settings.
+server:
+  # Host and port to listen on.
+  address: :4040
+  # (optional) Credentials for simple HTTP auth.
+  auth:
+    user: user
+    pass: password
+
+# Recovery mode: all pending transactions from DB will be sent at the
+# service start.
+recovery:
+  enabled: true
+
+advisor_url: https://api.dev-15.symbiosis.finance/calculations/v1/swap/policy
+
+# Specify DB connection settings.
+store:
+  dsn: postgresql://postgres@localhost/symbiosis_broadcaster

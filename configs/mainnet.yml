@@ -1,0 +1,47 @@
+chains:
+  - id: 1
+    kind: evm
+    whitelist:
+      - 0xd5F0f8dB993D26F5df89E70a83d32b369DcCdaa0
+    endpoints:
+      - https://mainnet.infura.io/v3/ccca8cb1a5ac476699a5e59b73219cf4
+      - https://eth.getblock.io/mainnet/?api_key=578c154a-b4bf-4086-887b-53447c05be4f
+  - id: 43114
+    kind: evm
+    whitelist:
+      - 0xd5F0f8dB993D26F5df89E70a83d32b369DcCdaa0
+    endpoints:
+      - https://nd-756-548-322.p2pify.com/cab7eada8a5cfcb8dffdc14b443aa760/ext/bc/C/rpc
+      - https://avax.getblock.io/mainnet/ext/bc/C/rpc/?api_key=578c154a-b4bf-4086-887b-53447c05be4f
+      - https://api.avax.network/ext/bc/C/rpc
+  - id: 56
+    kind: evm
+    whitelist:
+      - 0xd5F0f8dB993D26F5df89E70a83d32b369DcCdaa0
+    endpoints:
+      - https://nd-130-797-380.p2pify.com/04845ab2c197abb383992791cbdb7213
+      - https://bsc.getblock.io/mainnet/?api_key=578c154a-b4bf-4086-887b-53447c05be4f
+      - https://bsc-dataseed.binance.org
+  - id: 137
+    kind: evm
+    whitelist:
+      - 0xd5F0f8dB993D26F5df89E70a83d32b369DcCdaa0
+    endpoints:
+      - https://polygon-mainnet.g.alchemy.com/v2/cHjz4w5YssmAhOQfpbyDOPHEEbbtGtNV
+      - https://nd-746-607-493.p2pify.com/78ab40508c3b4239751bac251cc96f17
+      - https://matic.getblock.io/mainnet/?api_key=578c154a-b4bf-4086-887b-53447c05be4f
+      - https://polygon-rpc.com
+  - id: 288
+    kind: evm
+    whitelist:
+      - 0xd5F0f8dB993D26F5df89E70a83d32b369DcCdaa0
+    endpoints:
+      - https://mainnet.boba.network
+  - id: 2001
+    kind: evm
+    whitelist:
+      - 0xd5F0f8dB993D26F5df89E70a83d32b369DcCdaa0
+    endpoints:
+      - https://rpc-mainnet-cardano-evm.c1.milkomeda.com
+recovery:
+  enabled: true
