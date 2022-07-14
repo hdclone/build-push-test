@@ -36,7 +36,7 @@ jobs:
         repo: svc-broadcaster-k8s-test
 #        repo: svc-broadcaster-config
 #        owner: hdclone 
-        event_type: trigger_on_push
+        event_type: trigger_on_push_test
         message: |
           {
             "imagetag": "${{ env.SHORT_SHA }}",
