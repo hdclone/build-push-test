@@ -28,18 +28,6 @@ jobs:
         push: true
         tags: krasnayasobaka/internal_practice:${{ env.SHORT_SHA }}
 #        tags: symbiosisfinance/${{ env.REPO_NAME }}:${{ env.SHORT_SHA }}
-    - name: Waiting docker image build
-      uses: PaulLesur/wait-docker-image-github-action@v1.0
-      with:
-#        image: "symbiosisfinance/${{ env.REPO_NAME }}"
-        image: "krasnayasobaka/internal_practice"
-        tag: "${{ env.SHORT_SHA }}"
-        timeout: 600
-        fail-on-timeout: true
-#        user: "${{ secrets.DOCKERHUB_LOGIN }}"
-        user: "${{ secrets.DOCKERHUB_LOGIN_MY }}"
-#        password: "${{ secrets.DOCKERHUB_PASSWORD }}"
-        password: "${{ secrets.DOCKERHUB_PASSWORD_MY }}"
     - name: Emit repository_dispatch
       uses: mvasigh/dispatch-action@main
       with:
@@ -50,6 +38,6 @@ jobs:
         event_type: trigger_on_push
         message: |
           {
-            "eslinizhe": "${{ env.SHORT_SHA }}",
-            "esliwishe": "pochemu"
+            "imagetag": "${{ env.SHORT_SHA }}",
+            "env": "value"
           }
