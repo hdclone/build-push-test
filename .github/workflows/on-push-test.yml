@@ -1,0 +1,44 @@
+name: "Triggering other repo on push dev branch"
+on:
+  push:
+    branches:        
+      - dev
+
+jobs:
+  wait-and-dispatch:
+    name: Wait image building and trigger other repo
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: Set variables
+      run: |
+        echo "REPO_NAME=$(echo ${GITHUB_REPOSITORY} | cut -d/ -f2)" >> $GITHUB_ENV
+        echo "SHORT_SHA=`echo ${GITHUB_REF_NAME} | tr / -`-`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV
+        echo "BRANCH_NAME=$(echo ${GITHUB_REF})" >> $GITHUB_ENV
+    - name: Login to Docker Hub
+      uses: docker/login-action@v1
+      with:
+#        username: ${{ secrets.DOCKERHUB_LOGIN_MY }}
+#        password: ${{ secrets.DOCKERHUB_PASSWORD_MY }}
+        username: ${{ secrets.DOCKERHUB_LOGIN_MY }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD_MY }}
+    - name: Build and push
+      uses: docker/build-push-action@v2
+      with:
+        push: true
+        tags: krasnayasobaka/internal_practice:${{ env.SHORT_SHA }}
+#        tags: symbiosisfinance/${{ env.REPO_NAME }}:${{ env.SHORT_SHA }}
+    - name: Emit repository_dispatch
+      uses: mvasigh/dispatch-action@main
+      with:
+        token: ${{ secrets.PERSONAL_ACCESS_TOKEN }} # Токен другой репы
+        repo: svc-broadcaster-k8s-test
+#        repo: svc-broadcaster-config
+#        owner: hdclone 
+        event_type: trigger_on_push_test
+        message: |
+          {
+            "imagetag": "${{ env.SHORT_SHA }}",
+            "branchname": "${{ env.BRANCH_NAME }}"
+          }
