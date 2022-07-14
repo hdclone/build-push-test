@@ -1,0 +1,42 @@
+version: '3.4'
+services:
+  db:
+    image: "postgres:13-alpine"
+    restart: always
+    container_name: "${DEPLOY_PROJECT}-db"
+    hostname: db
+    networks:
+      project:
+        aliases:
+          - db
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - db:/var/lib/postgresql/data
+  service:
+    image: ${DEPLOY_IMAGE}
+    restart: always
+    container_name: ${DEPLOY_PROJECT}
+    expose:
+        - 4040
+    environment:
+      BROADCASTER_SERVER_ADDRESS: 0.0.0.0:4040
+      BROADCASTER_ENV: ${DEPLOY_PROJECT_ENV}
+      BROADCASTER_STORE_DSN: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db/${POSTGRES_DB}
+      LOGGER_FORMAT: json
+    depends_on:
+      - db
+    links:
+      - db
+    networks:
+      project:
+      traefik:
+volumes:
+  db:
+    name: ${DEPLOY_PROJECT}-db
+networks:
+  project:
+  traefik:
+    external: true

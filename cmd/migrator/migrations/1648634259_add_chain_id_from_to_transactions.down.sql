@@ -1,0 +1,1 @@
+alter table transactions drop column chain_id_from;

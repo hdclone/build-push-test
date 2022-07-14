@@ -1,0 +1,33 @@
+version: '3.4'
+services:
+  service:
+    environment:
+      LOGGER_LEVEL: debug
+      LOGGER_FORMAT: json
+      BROADCASTER_CHAIN_256_KEY: ${BROADCASTER_CHAIN_256_KEY}
+      BROADCASTER_CHAIN_43113_KEY: ${BROADCASTER_CHAIN_43113_KEY}
+      BROADCASTER_CHAIN_4_KEY: ${BROADCASTER_CHAIN_4_KEY}
+      BROADCASTER_CHAIN_42_KEY: ${BROADCASTER_CHAIN_42_KEY}
+      BROADCASTER_CHAIN_65_KEY: ${BROADCASTER_CHAIN_65_KEY}
+      BROADCASTER_CHAIN_80001_KEY: ${BROADCASTER_CHAIN_80001_KEY}
+      BROADCASTER_CHAIN_97_KEY: ${BROADCASTER_CHAIN_97_KEY}
+      BROADCASTER_CHAIN_28_KEY: ${BROADCASTER_CHAIN_28_KEY}
+      BROADCASTER_ADVISOR_URL: http://svc-advisor-local:8080/v1/swap/policy
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.middlewares.${DEPLOY_PROJECT}.stripprefix.prefixes=${DEPLOY_PATH_PREFIX}'
+      - 'traefik.http.middlewares.${DEPLOY_PROJECT}.stripprefix.forceSlash=false'
+      - 'traefik.http.services.${DEPLOY_PROJECT}.loadbalancer.server.port=4040'
+      - 'traefik.http.routers.${DEPLOY_PROJECT}.service=${DEPLOY_PROJECT}'
+      - 'traefik.http.routers.${DEPLOY_PROJECT}.middlewares=dev-broadcaster-auth@file, ${DEPLOY_PROJECT}'
+      - 'traefik.http.routers.${DEPLOY_PROJECT}.entrypoints=websecure'
+      - 'traefik.http.routers.${DEPLOY_PROJECT}.rule=Host(`${DEPLOY_DOMAIN}`)&&PathPrefix(`${DEPLOY_PATH_PREFIX}`)'
+      - 'traefik.http.routers.${DEPLOY_PROJECT}.tls=true'
+      - 'traefik.http.routers.${DEPLOY_PROJECT}.tls.certresolver=le'
+    networks:
+      internal-dev:
+        aliases:
+          - svc-broadcaster-local
+networks:
+  internal-dev:
+    external: true

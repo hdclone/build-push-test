@@ -1,0 +1,3 @@
+[submodule "cmd/test-tool/mock/openzeppelin-contracts"]
+	path = cmd/test-tool/mock/openzeppelin-contracts
+	url = git@github.com:OpenZeppelin/openzeppelin-contracts.git

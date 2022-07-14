@@ -1,0 +1,43 @@
+version: '3.4'
+services:
+  service:
+    environment:
+      BROADCASTER_LOGGER_LEVEL: debug
+      BROADCASTER_CHAIN_256_KEY: ${BROADCASTER_CHAIN_256_KEY}
+      BROADCASTER_CHAIN_43113_KEY: ${BROADCASTER_CHAIN_43113_KEY}
+      BROADCASTER_CHAIN_4_KEY: ${BROADCASTER_CHAIN_4_KEY}
+      BROADCASTER_CHAIN_42_KEY: ${BROADCASTER_CHAIN_42_KEY}
+      BROADCASTER_CHAIN_65_KEY: ${BROADCASTER_CHAIN_65_KEY}
+      BROADCASTER_CHAIN_80001_KEY: ${BROADCASTER_CHAIN_80001_KEY}
+      BROADCASTER_CHAIN_97_KEY: ${BROADCASTER_CHAIN_97_KEY}
+      BROADCASTER_CHAIN_28_KEY: ${BROADCASTER_CHAIN_28_KEY}
+      BROADCASTER_ADVISOR_URL: http://svc-advisor:8080/v1/swap/policy
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.middlewares.${DEPLOY_PROJECT}.stripprefix.prefixes=${DEPLOY_PATH_PREFIX}'
+      - 'traefik.http.middlewares.${DEPLOY_PROJECT}.stripprefix.forceSlash=false'
+      - 'traefik.http.services.${DEPLOY_PROJECT}.loadbalancer.server.port=4040'
+
+      - 'traefik.http.routers.${DEPLOY_PROJECT}-protected.service=${DEPLOY_PROJECT}'
+      - 'traefik.http.routers.${DEPLOY_PROJECT}-protected.middlewares=dev-broadcaster-auth@file, ${DEPLOY_PROJECT}'
+      - 'traefik.http.routers.${DEPLOY_PROJECT}-protected.entrypoints=websecure'
+      - 'traefik.http.routers.${DEPLOY_PROJECT}-protected.rule=Host(`${DEPLOY_DOMAIN}`)&&PathPrefix(`${DEPLOY_PATH_PREFIX}v1/broadcast`)'
+      - 'traefik.http.routers.${DEPLOY_PROJECT}-protected.tls=true'
+      - 'traefik.http.routers.${DEPLOY_PROJECT}-protected.tls.certresolver=le'
+      - 'traefik.http.routers.${DEPLOY_PROJECT}-protected.priority=2'
+
+      - 'traefik.http.routers.${DEPLOY_PROJECT}-public.service=${DEPLOY_PROJECT}'
+      - 'traefik.http.routers.${DEPLOY_PROJECT}-public.middlewares=${DEPLOY_PROJECT}'
+      - 'traefik.http.routers.${DEPLOY_PROJECT}-public.entrypoints=websecure'
+      - 'traefik.http.routers.${DEPLOY_PROJECT}-public.rule=Host(`${DEPLOY_DOMAIN}`)&&PathPrefix(`${DEPLOY_PATH_PREFIX}`)'
+      - 'traefik.http.routers.${DEPLOY_PROJECT}-public.tls=true'
+      - 'traefik.http.routers.${DEPLOY_PROJECT}-public.tls.certresolver=le'
+      - 'traefik.http.routers.${DEPLOY_PROJECT}-public.priority=1'
+
+    networks:
+      internal-testnet:
+        aliases:
+          - svc-broadcaster
+networks:
+  internal-testnet:
+    external: true

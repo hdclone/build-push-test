@@ -1,0 +1,49 @@
+chains:
+  - id: 4
+    kind: evm
+    endpoints:
+      - https://rinkeby.infura.io/v3/ccca8cb1a5ac476699a5e59b73219cf4
+      - https://eth.getblock.io/rinkeby/?api_key=578c154a-b4bf-4086-887b-53447c05be4f
+  - id: 97
+    kind: evm
+    endpoints:
+      - https://nd-409-866-115.p2pify.com/fd1b0ad58aa6bfbf9e73c47290189cd4
+      - https://bsc.getblock.io/testnet/?api_key=578c154a-b4bf-4086-887b-53447c05be4f
+      - https://data-seed-prebsc-1-s1.binance.org:8545
+  - id: 43113
+    kind: evm
+    endpoints:
+      - https://nd-121-182-206.p2pify.com/e9cc9598178791ed0c5e6cd00ef7f3c2/ext/bc/C/rpc
+      - https://avax.getblock.io/testnet/ext/bc/C/rpc/?api_key=578c154a-b4bf-4086-887b-53447c05be4f
+      - https://api.avax-test.network/ext/bc/C/rpc
+  - id: 65
+    kind: evm
+    endpoints:
+      - https://exchaintestrpc.okex.org/
+  - id: 80001
+    kind: evm
+    endpoints:
+      - https://nd-771-487-261.p2pify.com/d2679fc58ae11d4c41c1a729dd123a2c
+      - https://matic.getblock.io/testnet/?api_key=578c154a-b4bf-4086-887b-53447c05be4f
+      - https://rpc-mumbai.matic.today/
+  - id: 256
+    kind: evm
+    endpoints:
+      - https://http-testnet.hecochain.com/
+  - id: 28
+    kind: evm
+    endpoints:
+      - https://rinkeby.boba.network
+  - id: 200101
+    kind: evm
+    endpoints:
+      - https://rpc-devnet-cardano-evm.c1.milkomeda.com/
+  - id: 700001
+    kind: cosmos
+    endpoints:
+      - bombay-12--grpc--full.grpc.datahub.figment.io:443
+    terra:
+      id: bombay-12
+      auth: e2ce2ceb74d4cd01d7dd159a47a6ea9f
+#recovery:
+#  enabled: true
