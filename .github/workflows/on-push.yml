@@ -25,7 +25,8 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: symbiosisfinance/${{ env.REPO_NAME }}:${{ env.SHORT_SHA }}
+#        tags: symbiosisfinance/${{ env.REPO_NAME }}:${{ env.SHORT_SHA }}
+        tags: symbiosisfinance/svc-broadcaster:${{ env.SHORT_SHA }}
     - name: Emit repository_dispatch
       uses: mvasigh/dispatch-action@main
       with:
